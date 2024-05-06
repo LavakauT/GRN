@@ -174,103 +174,76 @@ u.30 <- read.table(paste(path2, 'ara_HS_30_CT_0_u.txt', sep = '/'), header = T)[
 d.30 <- read.table(paste(path2, 'ara_HS_30_CT_0_d.txt', sep = '/'), header = T)[,1]
 n.30 <- read.table(paste(path2, 'ara_HS_30_CT_0_n.txt', sep = '/'), header = T)[,1]
 
-u.60 <- read.table(paste(path2, 'ara_HS_60_CT_0_u.txt', sep = '/'), header = T)[,1]
-d.60 <- read.table(paste(path2, 'ara_HS_60_CT_0_d.txt', sep = '/'), header = T)[,1]
-n.60 <- read.table(paste(path2, 'ara_HS_60_CT_0_n.txt', sep = '/'), header = T)[,1]
+# u.60 <- read.table(paste(path2, 'ara_HS_60_CT_0_u.txt', sep = '/'), header = T)[,1]
+# d.60 <- read.table(paste(path2, 'ara_HS_60_CT_0_d.txt', sep = '/'), header = T)[,1]
+# n.60 <- read.table(paste(path2, 'ara_HS_60_CT_0_n.txt', sep = '/'), header = T)[,1]
 
-lt <- list(u.30, d.30, n.30, u.60, d.60, n.60)
-list_to_matrix(lt)
+# lt <- list(u.30, d.30, n.30, u.60, d.60, n.60)
+# list_to_matrix(lt)
 
-names(lt) <- c('Up_0.5HR', 'Dwn_0.5HR', 'Neg_0.5HR', 'Up_1HR', 'Dwn_1HR', 'Neg_1HR')
-m1 <- make_comb_mat(lt)
-comb_name(m1)
-comb_size(m1)
-
-
-UpSet(t(m1[comb_degree(m1) == 2]))
-
-ss = set_size(m1)
-cs = comb_size(m1)
-ht = UpSet(m1, 
-           set_order = order(ss),
-           comb_order = order(comb_degree(m1), -cs),
-           top_annotation = HeatmapAnnotation(
-             "Gene Intersections" = anno_barplot(cs, 
-                                                 ylim = c(0, max(cs)*1.1),
-                                                 border = FALSE, 
-                                                 gp = gpar(fill = "black"), 
-                                                 height = unit(4, "cm")
-             ), 
-             annotation_name_side = "left", 
-             annotation_name_rot = 90),
-           left_annotation = rowAnnotation(
-             "Gene Per Dataset" = anno_barplot(-ss, 
-                                               baseline = 0,
-                                               axis_param = list(
-                                                 at = c(0, -1500, -5000),
-                                                 labels = c(0, 1500, 5000),
-                                                 labels_rot = 0),
-                                               border = FALSE, 
-                                               gp = gpar(fill = "black"), 
-                                               width = unit(4, "cm")
-             ),
-             set_name = anno_text(set_name(m1), 
-                                  location = 0.5, 
-                                  just = "center",
-                                  width = max_text_width(set_name(m1)) + unit(4, "mm"))
-           ), 
-           right_annotation = NULL,
-           show_row_names = FALSE)
+# names(lt) <- c('Up_0.5HR', 'Dwn_0.5HR', 'Neg_0.5HR', 'Up_1HR', 'Dwn_1HR', 'Neg_1HR')
+# m1 <- make_comb_mat(lt)
+# comb_name(m1)
+# comb_size(m1)
 
 
-ht = draw(ht)
-od = column_order(ht)
-decorate_annotation("Gene Intersections", {
-  grid.text(cs[od], x = seq_along(cs), y = unit(cs[od], "native") + unit(2, "pt"), 
-            default.units = "native", just = c("left", "bottom"), 
-            gp = gpar(fontsize = 6, col = "#404040"), rot = 45)
-})
+# UpSet(t(m1[comb_degree(m1) == 2]))
 
-comb_degree(m1)
-UU <- extract_comb(m1, "100100")
-DD <- extract_comb(m1, "010010")
-NN <- extract_comb(m1, "001001")
+# ss = set_size(m1)
+# cs = comb_size(m1)
+# ht = UpSet(m1, 
+#            set_order = order(ss),
+#            comb_order = order(comb_degree(m1), -cs),
+#            top_annotation = HeatmapAnnotation(
+#              "Gene Intersections" = anno_barplot(cs, 
+#                                                  ylim = c(0, max(cs)*1.1),
+#                                                  border = FALSE, 
+#                                                  gp = gpar(fill = "black"), 
+#                                                  height = unit(4, "cm")
+#              ), 
+#             annotation_name_side = "left", 
+#              annotation_name_rot = 90),
+#            left_annotation = rowAnnotation(
+#              "Gene Per Dataset" = anno_barplot(-ss, 
+#                                                baseline = 0,
+#                                                axis_param = list(
+#                                                  at = c(0, -1500, -5000),
+#                                                  labels = c(0, 1500, 5000),
+#                                                  labels_rot = 0),
+#                                                border = FALSE, 
+#                                                gp = gpar(fill = "black"), 
+#                                                width = unit(4, "cm")
+#              ),
+#              set_name = anno_text(set_name(m1), 
+#                                   location = 0.5, 
+#                                   just = "center",
+#                                   width = max_text_width(set_name(m1)) + unit(4, "mm"))
+#            ), 
+#            right_annotation = NULL,
+#            show_row_names = FALSE)
 
 
-ma <- t(data.frame(UU = c('1','1'),
-                   DD = c('-1', '-1')))
-colnames(ma) <- c('0.5HR', '1HR')
+# ht = draw(ht)
+# od = column_order(ht)
+# decorate_annotation("Gene Intersections", {
+#   grid.text(cs[od], x = seq_along(cs), y = unit(cs[od], "native") + unit(2, "pt"), 
+#             default.units = "native", just = c("left", "bottom"), 
+#             gp = gpar(fontsize = 6, col = "#404040"), rot = 45)
+# })
 
+# comb_degree(m1)
+# UU <- extract_comb(m1, "100100")
+# DD <- extract_comb(m1, "010010")
+# NN <- extract_comb(m1, "001001")
 
-count <- c('1298','1294')
-
-colors = structure(c('blue','grey60','red'), names = c("-1", "0", "1"))
-ha = rowAnnotation('# of genes' = anno_text(count, location = 0.5, just = "center",
-                                            gp = gpar(fill = rep(2:4, each = 4),
-                                                      col = "black", border = "black", fill = "orange"),
-                                            width = max_text_width(count)*1.2))
-
-Heatmap(ma,
-        name = 'log2(FC)',
-        col = colors,
-        show_row_dend =FALSE,
-        show_row_names = TRUE,
-        row_names_side = 'left',
-        cluster_columns = FALSE,
-        column_names_side = 'top',
-        column_names_gp = gpar(fontsize = 15),
-        column_names_rot = 0,
-        row_title = 'HS responsive clusters',
-        right_annotation = ha,
-        heatmap_legend_param = list(direction = "horizontal",
-                                    nrow = 1),
-        column_split = c(1,2)) # check the clusters
-
+# There are DEGs in heat shock 30 mimutes and 60 munites.
+# I decided to focus DEGs in 30 minutes for representing rapid response of heat shock.
+# Therefore, the DD groups means down-regulated genes, UU groups means up-regualted genes, and NN group means non-responsive genes in 30 minutes.
 
 setwd(path2)
-write.table(UU, 'UU.txt', col.names = F, row.names = F, quote = F, sep = '\t')
-write.table(DD, 'DD.txt', col.names = F, row.names = F, quote = F, sep = '\t')
-write.table(NN, 'NN.txt', col.names = F, row.names = F, quote = F, sep = '\t')
+write.table(u.30, 'UU.txt', col.names = F, row.names = F, quote = F, sep = '\t')
+write.table(d.30, 'DD.txt', col.names = F, row.names = F, quote = F, sep = '\t')
+write.table(n.30, 'NN.txt', col.names = F, row.names = F, quote = F, sep = '\t')
 #######################
 
 ###### attribution file for network construction ######
