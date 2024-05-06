@@ -1,0 +1,74 @@
+---------make directories for your JAVA and ANTs------------
+mkdir JAVA_JDK 
+mkdir ANTs    
+
+# install
+# download the ARACNe-AP-master from https://github.com/califano-lab/ARACNe-AP
+
+# download the tar.gz file from https://ant.apache.org/bindownload.cgi
+# and drag it into ANTs
+tar -zxvf /your/pathway/to/apache-ant-1.9.16-bin.tar.gz
+
+# download the tar.gz file from ttps://www.oracle.com/tw/java/technologies/downloads/
+# and drag it into JAVA_JDK
+# Please note: download the file corresponding to your system
+tar -zxvf /your/pathway/to/jdk-22_macos-x64_bin.tar.gz
+############################################################
+
+
+
+---------environment setting for applying JAVA-------
+# cd to your personal folder
+vi .profile
+
+# enter I to enter insertion model
+export JAVA_HOME=/Users/user/JAVA_JDK/jdk-22.0.1/COn
+export CLASSPATH=$:CLASSPATH:$JAVA_HOME/lib/ 
+export PATH=$PATH:$JAVA_HOME/bin
+
+export ANT_HOME=/Users/user/ANTs/apache-ant-1.9.16
+export PATH=$ANT_HOME/bin:$PATH
+
+# type end to back to common pattern
+# type : to enter the final line mode
+# type wq to save and leave editor
+
+source .profile
+# cd to the folder of ARACNe-AP-master
+java -version
+ant -version
+
+
+ant main
+# it should show BUILD SUCCESSFUL
+############################################################
+
+
+
+------network infference------------
+# prepare your expression file and TF list
+# cd to the folder of ARACNe-AP-master
+
+mkdir ara 
+# drag the matrix.txt and tfs.txt in to ara folder
+# note that the gene annotation must be the same between expression file and TF list
+
+
+#Step1 Calculate threshold with a fixed seed
+java -Xmx5G -jar dist/aracne.jar -e ara/matrix.txt  -o ara --tfs ara/tfs.txt --pvalue 1E-8 --seed 1 \--calculateThreshold
+
+#Step2: Run ARACNe on a single bootstrap
+java -Xmx5G -jar dist/aracne.jar -e ara/matrix.txt  -o ara --tfs ara/tfs.txt --pvalue 1E-8 --seed 1
+
+#Step3: Run 100 reproducible bootstraps
+for i in {1..100}
+do
+java -Xmx5G -jar dist/aracne.jar -e ara/matrix.txt  -o ara --tfs ara/tfs.txt --pvalue 1E-8 --seed $i
+done
+
+#Step4: Consolidate bootstraps in the output folder
+java -Xmx5G -jar dist/aracne.jar -o ara --consolidate
+
+# there should be one network.txt file in your ara folder
+# copy it into network folder as aracne_network.txt
+############################################################
