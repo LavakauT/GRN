@@ -69,6 +69,15 @@ done
 #Step4: Consolidate bootstraps in the output folder
 java -Xmx5G -jar dist/aracne.jar -o ara --consolidate
 
+#Step5: Run a single ARACNE with no bootstrap and no DPI
+java -Xmx5G -jar dist/aracne.jar -e ara/matrix.txt  -o ara --tfs ara/tfs.txt --pvalue 1E-8 --seed 1 \ --nobootstrap --nodpi
+
+#Step6: Consolidate bootstraps without Bonferroni correction
+java -Xmx5G -jar dist/aracne.jar -o ara --consolidate --nobonferroni
+
+# there should be one network.txt file in your ara folder
+# copy it into network folder as aracne_network.txt
+
 # there should be one network.txt file in your ara folder
 # copy it into network folder as aracne_network.txt
 ############################################################
