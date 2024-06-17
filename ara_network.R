@@ -2,19 +2,16 @@
 library(dplyr)
 library(tibble)
 library(ggplot2)
+library(pgirmess)
 library(randomForest)
 library(GENIE3)
-
-# please go to https://github.com/aertslab/GENIE3 and downloading R version of GENIE3
-source('/Volumes/R425/Lavakau/kmers_data/GRN/script/GENIE3-master/R/GENIE3.R')
 #######################
 
 ###### load corresponding data ######
-path <- '/Volumes/R425/Lavakau/kmers_data/GRN/script/arabidopsis'
-path2 <- paste(path, 'deg', sep = '/')
-setwd(path2)
+path <- '~/absolute/path/to/GRN-main'
+setwd(path)
 attr <- read.table('attr.txt', header = T)
-norm.counts <- read.table('vst_norm_count.txt')
+norm.counts <- read.delim('file/vst_norm_count.txt')
 
 # plantTFDB database for transcription factors annotation:
 # https://planttfdb.gao-lab.org/download.php#tfext
@@ -41,9 +38,9 @@ attr.anno$gene %>% duplicated() %>% table()
 attr.anno <- attr.anno[!duplicated(attr.anno$gene),]
 
 # exprot DEG attribution with more annotation
-path3 <- paste(path2, 'network', sep = '/')
-dir.create(path3)
-setwd(path3)
+path3 <- paste(path, 'network', sep = '/')
+dir.create(path2)
+setwd(path2)
 write.table(attr.anno, 'attr.anno.txt', row.names = F, quote = F, sep = '\t')
 #######################
 
@@ -59,7 +56,7 @@ link.list <- getLinkList(weight.matrix.tf, threshold = 0.01)
 # dim(link.list)
 sum.link.list <- data.frame(quantile(link.list$weight))
 
-setwd(path3)
+setwd(path2)
 range <- data.frame(confidence = c('low', 'medium', 'high'),
                     quantile = c('25%', '50%', '75%'))
 for (i in 1:3) {
@@ -74,12 +71,12 @@ matrix <- data.frame(expr.matrix) %>%
   rownames_to_column(., var = 'gene')
 
 # export the matrix file and TF list for ARACNe-AP
-setwd(path3)
+setwd(path2)
 write.table(matrix, 'matrix.txt', row.names = F, quote = F, sep = '\t')
 
 write.table(input.genes, 'tfs.txt',
             row.names = F, col.names = F, quote = F, sep = '\t')
-# Please follow the aracne.txt to inffer regulatory links
+# Please follow the aracne.txt to infer regulatory links
 #######################
 
 
@@ -129,5 +126,5 @@ write.table(filter, 'filter.txt',
 #######################
 
 
-###### user the filter file to subset the top20 sub-network ######
+###### Use the filter file to subset the top20 sub-network ######
 #######################
