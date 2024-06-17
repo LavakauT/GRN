@@ -6,8 +6,8 @@ library(stringr)
 #######################
 
 ####### kmer nodes edges application ######
-path <- '/Volumes/R425/Lavakau/kmers_data/GRN/script/arabidopsis/deg'
-setwd(paste(path, 'deg', sep = '/'))
+path <- '~/absolute/path/to/GRN-main'
+setwd(path)
 
 sub.dir <- list.dirs(paste(path, 'motif', sep = '/'),
                      full.names = FALSE,
