@@ -87,7 +87,7 @@ write.table(input.genes, 'tfs.txt',
 
 
 ###### double ranking (MI vs weight) ######
-setwd(path3)
+setwd(path2)
 df <- read.csv('Merged Network default edge.csv') %>% 
   select(weight, MI)
 
