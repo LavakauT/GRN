@@ -6,15 +6,16 @@ library(stringr)
 #######################
 
 ####### kmer nodes edges application ######
-path <- '~/absolute/path/to/GRN-main'
+p <- '~/absolute/path/to/GRN-main'
+path <- paste(p, 'network', sep = '/')
 setwd(path)
 
-sub.dir <- list.dirs(paste(path, 'motif', sep = '/'),
+sub.dir <- list.dirs(paste(p, 'motif', sep = '/'),
                      full.names = FALSE,
                      recursive = FALSE)
 
-dir <- paste(path, 'motif', sep = '/')
-dir2 <- paste(path, 'training/tss_5utr_promoter_pcc', sep = '/')
+dir <- paste(p, 'motif', sep = '/')
+dir2 <- paste(p, 'training/tss_5utr_promoter_pcc', sep = '/')
 
 for (z in 1:length(sub.dir)) {
   attr <- read.csv('Merged Network default node.csv') %>% 
