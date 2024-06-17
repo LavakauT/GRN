@@ -110,7 +110,7 @@ Once you have prepared all the files, please follow the below steps to get the G
 
 > Choose + below this filter. It will jump out where the "adjacent edges" match the filter
 
-> Choose Column... >> Edge: kmer "is" "Support" (not including Nodata) or Edge: kmer "is not" "Reject" (including Nodata)
+> Choose Column... >> Edge: kmer "is" "Support" (not including Nodata) or Edge: kmer "is not" "Reject" (including Nodata). Repeat and repeat.
 
 > You can export node and edge as new files.
 
