@@ -17,7 +17,7 @@
 ## Steps of Constructing GRN
 Once you have prepared all the files, please follow the below steps to get the GRN:
 
-1. Follow [ara_network.R](ara_network.R) to generate [GRN_GRNIE3](network/ara_hs_genie3_tf_high.txt) inferred by GENIE3 algorithm and export matrix file/TF list for ARACNe-AP algorithm.
+1. Follow [Network.R](ara_network.R) to generate [GRN_GRNIE3](network/ara_hs_genie3_tf_high.txt) inferred by GENIE3 algorithm and export matrix file/TF list for ARACNe-AP algorithm.
 2. Follow [ARACNe-AP](aracne.txt) to install Stand-alone JAVA/ANTs and generate [GRN_ARACNe-AP](network/aracne_network.txt) inferred by ARACNe-AP.
 3. Install Cytoscape and upload your two GRN:
 ```
