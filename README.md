@@ -1,7 +1,5 @@
 # Informative GRN with kmer (Following KmerDiscovery, ML_pipeline, and kmer_similarity)
-
-
-![GRN](https://github.com/LavakauT/GRN/assets/132649549/9b67a914-730a-4a49-8f11-8fbdd9fdb742)
+><img src="https://github.com/LavakauT/GRN/assets/132649549/9b67a914-730a-4a49-8f11-8fbdd9fdb742" width="40%">
 
 
 ## Prepare files before constructing GRN
