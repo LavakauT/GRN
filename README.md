@@ -1,5 +1,9 @@
 # Informative GRN with kmer (Following KmerDiscovery, ML_pipeline, and kmer_similarity)
 
+
+![GRN](https://github.com/LavakauT/GRN/assets/132649549/9b67a914-730a-4a49-8f11-8fbdd9fdb742)
+
+
 ## Prepare files before constructing GRN
 1. [VST-transfromed court data](file/vst_norm_count.txt) and Differential group genes ([UU_Gene](file/UU.txt) and [DD_Gene](file/DD.txt) groups in sample data sets).
    You can generate an [original attribute file](attr.txt) before adding Kmer information.
